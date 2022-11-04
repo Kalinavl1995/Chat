@@ -7,13 +7,13 @@ export default class UserList {
     buildDOM() {
         const fragment = document.createDocumentFragment();
 
-        this.element.innnerHTML = '';
+        this.element.innerHTML = '';
 
         for (const name of this.items) {
             const element = document.createElement('div');
             element.classList.add('user-list-item');
             element.textContent = name;
-            fragment.appendChild(element);
+            fragment.append(element);
         }
 
         this.element.append(fragment);

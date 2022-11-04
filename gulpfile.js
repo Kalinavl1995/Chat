@@ -16,16 +16,18 @@ import server from './gulp/tasks/server.js';
 import html from './gulp/tasks/html.js';
 // import scss from './gulp/tasks/scss.js';
 import js from './gulp/tasks/script.js';
-// import img from './gulp/tasks/img.js';
+import img from './gulp/tasks/img.js';
 // import fonts from './gulp/tasks/fonts.js';
 import copy from './gulp/tasks/copy.js';
+import copyPhotos from './gulp/tasks/copy-photos.js';
+
 
 // Watcher
 const watcher = () => {
     gulp.watch(path.html.watch, html).on('all', browserSync.reload);
     // gulp.watch(path.scss.watch, scss).on('all', browserSync.reload);
     gulp.watch(path.js.watch, js).on('all', browserSync.reload);
-    // gulp.watch(path.img.watch, img).on('all', browserSync.reload);
+    gulp.watch(path.img.watch, img).on('all', browserSync.reload);
     // gulp.watch(path.fonts.watch, fonts);
 };
 
@@ -33,7 +35,7 @@ export { copy };
 
 const build = gulp.series(
     clear,
-    gulp.parallel(html, js, copy),
+    gulp.parallel(html, js, img, copy, copyPhotos),
 );
 
 const dev = gulp.series(

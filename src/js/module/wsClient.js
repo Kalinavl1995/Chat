@@ -9,7 +9,6 @@ export default class WSClient {
             this.socket = new WebSocket(this.url);
             this.socket.addEventListener('open', resolve);
             this.socket.addEventListener('message', (e) => {
-                console.log(JSON.parse(e.data));
                 this.onMessage(JSON.parse(e.data));
             });
         });

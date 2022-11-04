@@ -36,9 +36,6 @@ export default class MessageList {
         item.classList.add('message-item', 'message-item-system');
         item.textContent = message;
 
-        console.log(this.element);
-        console.log(item);
-
         this.element.append(item);
         this.element.scrollTop = this.element.scrollHeight;
     }

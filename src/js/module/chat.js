@@ -5,12 +5,13 @@ import UserList from './userList.js';
 import MessageList from './messageList.js';
 import MessageSender from './messageSender.js';
 import WSClient from './wsClient.js';
+import UserPhoto from './userPhoto.js';
 
 
 export default class Chat {
     constructor() {
         this.wsClient = new WSClient(
-            `ws://localhost:8282`,
+            "ws://localhost:8282",
             this.onMessage.bind(this)
         );
 
@@ -30,9 +31,25 @@ export default class Chat {
                 document.querySelector('[data-role=message-sender]'),
                 this.onSend.bind(this)
             ),
+            userPhoto: new UserPhoto(
+                document.querySelector('[data-role=user-photo]'),
+                this.onUpload.bind(this)
+            ),
         };
 
         this.ui.loginWindow.show();
+    }
+
+    onUpload(data) {
+        this.ui.userPhoto.set(data);
+
+        fetch(`http://localhost:3000/upload-photo`, {
+            method: 'post',
+            body: JSON.stringify({
+                name: this.ui.userName.get(),
+                image: data,
+            })
+        });
     }
 
     onSend(message) {
@@ -46,6 +63,7 @@ export default class Chat {
         this.ui.loginWindow.hide();
         this.ui.mainWindow.show();
         this.ui.userName.set(name);
+        this.ui.userPhoto.set(`./photos/${name}.png?t=${Date.now()}`);
     }
 
     onMessage({type, from, data}) {
@@ -62,6 +80,14 @@ export default class Chat {
             this.ui.messageList.addSystemMessage(`${from} вышел из чата`);
         } else if (type === 'text-message') {
             this.ui.messageList.add(from, data.message);
+        } else if (type === 'photo-changed') {
+            const avatars = document.querySelectorAll(
+                `[data-role=user-avatar][data-user=${data.name}]`
+            );
+
+            for (const avatar of avatars) {
+                avatar.style.backgroundImage = `url(./photos/${data.name}.png?t=${Date.now()})`;
+            }
         }
     }
 }
