@@ -20,6 +20,6 @@ export default class UserPhoto {
     }
 
     set(photo) {
-        this.element.style.backgroundImage = `url(${photo})`;
+        this.element.style.backgroundImage = `url('${photo}')`;
     }
 }

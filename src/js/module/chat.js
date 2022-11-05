@@ -43,7 +43,7 @@ export default class Chat {
     onUpload(data) {
         this.ui.userPhoto.set(data);
 
-        fetch(`http://localhost:3000/upload-photo`, {
+        fetch(`http://localhost:8282/upload-photo`, {
             method: 'post',
             body: JSON.stringify({
                 name: this.ui.userName.get(),
@@ -86,7 +86,7 @@ export default class Chat {
             );
 
             for (const avatar of avatars) {
-                avatar.style.backgroundImage = `url(./photos/${data.name}.png?t=${Date.now()})`;
+                avatar.style.backgroundImage = `url('./photos/${data.name}.png?t=${Date.now()}')`;
             }
         }
     }

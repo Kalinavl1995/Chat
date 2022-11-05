@@ -1,5 +1,4 @@
 // не забудьте сделать npm install
-// так же прописать в консоли node index.js;)
 
 const fs = require('fs');
 const path = require('path');
@@ -17,13 +16,18 @@ function readBody(req) {
 }
 
 const server = http.createServer(async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Request-Method', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+	res.setHeader('Access-Control-Allow-Headers', '*');
+
   try {
     if (/\/photos\/.+\.png/.test(req.url)) {
       const [, imageName] = req.url.match(/\/photos\/(.+\.png)/) || [];
       const fallBackPath = path.resolve(__dirname, '../no-photo.png');
       const filePath = path.resolve(__dirname, '../photos/', imageName);
 
-      if (fs.existsSync(!filePath)) {
+      if (fs.existsSync(filePath)) {
         return fs.createReadStream(filePath).pipe(res);
       } else {
         return fs.createReadStream(fallBackPath).pipe(res);
