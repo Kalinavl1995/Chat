@@ -53,6 +53,7 @@ const server = http.createServer(async (req, res) => {
     res.end('fail');
   }
 });
+
 const wss = new Server({ server });
 const connections = new Map();
 
