@@ -63,7 +63,7 @@ export default class Chat {
         this.ui.loginWindow.hide();
         this.ui.mainWindow.show();
         this.ui.userName.set(name);
-        this.ui.userPhoto.set(`./photos/${name}.png?t=${Date.now()}`);
+        this.ui.userPhoto.set(`http://localhost:8282/photos/${name}.png?t=${Date.now()}`);
     }
 
     onMessage({type, from, data}) {

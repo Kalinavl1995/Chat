@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "gulp",
-    "build": "gulp --prodaction"
+    "build": "gulp --production"
   },
   "browserslist": [
     "last 3 versions"

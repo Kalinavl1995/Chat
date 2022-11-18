@@ -1,5 +1,3 @@
-// import { sanitize } from "./utils.js";
-
 export default class MessageList {
     constructor(element) {
         this.element = element;
@@ -15,7 +13,7 @@ export default class MessageList {
         item.classList.add('message-item');
         item.innerHTML = `
         <div class="message-item-left">
-            <div class="message-item-photo" data-role="user-avatar" data-user=${from} style="background-image: url('./photos/${from}.png?t=${Date.now()}')"></div>
+            <div class="message-item-photo" data-role="user-avatar" data-user=${from} style="background-image: url('http://localhost:8282/photos/${from}.png?t=${Date.now()}')"></div>
         </div>
         <div class="message-item-right">
             <div class="message-item-header">

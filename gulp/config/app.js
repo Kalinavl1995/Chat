@@ -1,4 +1,4 @@
-const isProd = process.argv.includes('--poduction');
+const isProd = process.argv.includes('--production');
 const isDev = !isProd;
 
 export default {
@@ -15,7 +15,7 @@ export default {
         // }
     },
     webpack: {
-        mode: isProd ? "prodaction" : "development"
+        mode: isProd ? "production" : "development"
     },
     imagemin: {
         verbose: true
